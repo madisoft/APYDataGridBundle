@@ -654,7 +654,8 @@ abstract class Source implements DriverInterface
         return preg_replace('#&([A-za-z]{2})(?:lig);#', '\1', $noaccentStr);
     }
 
-    protected function prepareColumnValues(Column\Column $column, $values)
+    // FIX ISSUE NUV-5472: da Column\Column a Column
+    protected function prepareColumnValues(Column $column, $values)
     {
         $existingValues = $column->getValues();
         if (!empty($existingValues)) {

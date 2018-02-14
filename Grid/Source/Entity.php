@@ -212,8 +212,9 @@ class Entity extends Source
                     $name = $previousParent . '.' . $element;
                 }
             }
-
-            $alias = str_replace('.', '::', $column->getId());
+            // FIX ISSUE NUV-5472.
+            // I :: non vengono interpretati dal Doctrine Parser.
+            $alias = str_replace('.', /*'::'*/'__', $column->getId());
         } elseif (strpos($name, ':') !== false) {
             $previousParent = $this->getTableAlias();
             $alias = $name;
@@ -239,6 +240,10 @@ class Entity extends Source
                 // Group by the primary field of the previous entity
                 $this->query->addGroupBy($previousParent);
                 $this->querySelectfromSource->addGroupBy($previousParent);
+
+                // FIX ISSUE NUV-5472
+                // I : non vengono interpretati dal Doctrine Parser.
+                $alias = str_replace(':', '_', $alias);
 
                 return "$functionWithParameters as $alias";
             }
@@ -552,7 +557,8 @@ class Entity extends Source
                 if ($key === 0) {
                     $this->manager->refresh($value); // Force a reload of entity from db due to grouping operations (sql)
                 }
-                $key = str_replace('::', '.', $key);
+                // FIX ISSUE NUV-5472
+                $key = str_replace(/*'::'*/'__', '.', $key);
 
                 if (in_array($key, $serializeColumns) && is_string($value)) {
                     $value = unserialize($value);
@@ -719,7 +725,10 @@ class Entity extends Source
 
                 $values = [];
                 foreach ($result as $row) {
-                    $value = $row[str_replace('.', '::', $column->getId())];
+
+                    // FIX ISSUE NUV-5472
+                    // Sostituisco i :: con __
+                    $value = $row[str_replace('.', /*'::'*/'__', $column->getId())];
 
                     switch ($column->getType()) {
                         case 'array':
