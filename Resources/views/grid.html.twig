@@ -90,7 +90,7 @@
         <span class="grid_massactions_helper">
         <span class="mass-actions-selected" id="{{ grid.hash }}_mass_action_selected"></span>
         </span>
-    {% spaceless %}
+    {% apply spaceless %}
       <div class="grid_massactions pull-right">
         <div class="form-inline">
           <div class="form-group">
@@ -111,7 +111,7 @@
                  name="{{ constant('APY\\DataGridBundle\\Grid\\Grid::REQUEST_QUERY_MASS_ACTION_SUBMIT') }}" value="{{ 'Submit Action'|trans }}"/>
         </div>
       </div>
-    {% endspaceless %}
+    {% endapply %}
   </div>
 {% endblock grid_actions %}
 
