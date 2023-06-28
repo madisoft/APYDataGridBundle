@@ -20,7 +20,7 @@ use Twig\Template;
 
 abstract class Export implements ExportInterface, ContainerAwareInterface
 {
-    const DEFAULT_TEMPLATE = 'APYDataGridBundle::blocks.html.twig';
+    const DEFAULT_TEMPLATE = '@APYDataGrid/blocks.html.twig';
 
     protected $title;
 
