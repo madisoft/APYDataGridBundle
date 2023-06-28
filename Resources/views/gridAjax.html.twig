@@ -1,5 +1,5 @@
 {% if property is defined %}
-    {{ grid(grid, gridTemplate|default('APYDataGridBundle::grid.html.twig'), '', {'property': property, 'idRendered': idRendered}) }}
+    {{ grid(grid, gridTemplate|default('@APYDataGrid/grid.html.twig'), '', {'property': property, 'idRendered': idRendered}) }}
 {% else %}
-    {{ grid(grid, 'APYDataGridBundle::grid.html.twig') }}
+    {{ grid(grid, '@APYDataGrid/grid.html.twig') }}
 {% endif %}

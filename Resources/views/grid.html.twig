@@ -1,4 +1,4 @@
-{% extends 'APYDataGridBundle::blocks_js.jquery.html.twig' %}
+{% extends '@APYDataGrid/blocks_js.jquery.html.twig' %}
 
 {# ------------------------------------------------------ grid ------------------------------------------------------ #}
 {% block grid %}
@@ -184,7 +184,8 @@
   {% if value is null or value == '' %}
     {# se value false non mostrare nulla #}
   {% else %}
-    {% include 'MadisoftFileBundle:Helper:downloadAndPreviewLinks.html.twig' with {excludeText: true} %}
+    {# il template indicato sotto non esiste più: lascio il commento in caso di problemi #}
+    {# include 'MadisoftFileBundle:Helper:downloadAndPreviewLinks.html.twig' with {excludeText: true} #}
   {% endif %}
 {% endblock grid_column_file_cell %}
 
