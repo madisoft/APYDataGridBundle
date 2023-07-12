@@ -129,7 +129,7 @@ class BooleanColumnTest extends TestCase
         ));
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->column = new BooleanColumn();
     }

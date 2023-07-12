@@ -4435,7 +4435,7 @@ class GridTest extends TestCase
         $this->assertSame($response, $this->grid->getGridResponse($view, $params)->getContent());
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->arrange($this->createMock(GridConfigInterface::class));
     }

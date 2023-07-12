@@ -135,7 +135,7 @@ class MassActionTest extends TestCase
         $this->assertEquals($role, $this->massAction->getRole());
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->massAction = new MassAction($this->title, $this->callback, $this->confirm, $this->parameters, $this->role);
     }

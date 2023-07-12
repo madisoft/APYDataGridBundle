@@ -55,7 +55,7 @@ class TextColumnTest extends TestCase
         }
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->column = new TextColumn();
     }

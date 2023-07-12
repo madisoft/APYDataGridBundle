@@ -277,7 +277,7 @@ class GridConfigBuilderTest extends TestCase
     /**
      * {@inheritdoc}
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->gridConfigBuilder = new GridConfigBuilder($this->name, $this->options);
     }

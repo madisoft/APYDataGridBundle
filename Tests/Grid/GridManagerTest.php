@@ -481,7 +481,7 @@ class GridManagerTest extends TestCase
         $this->assertEquals($response, $this->gridManager->getGridManagerResponse($view, $params)->getContent());
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->container = $this->createMock(Container::class);
         $this->gridManager = new GridManager($this->container);

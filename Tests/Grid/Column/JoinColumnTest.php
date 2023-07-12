@@ -88,7 +88,7 @@ class JoinColumnTest extends TestCase
         ], $column->getFilters('asource'));
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->column = new JoinColumn();
     }

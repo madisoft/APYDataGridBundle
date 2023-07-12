@@ -203,7 +203,7 @@ class RowTest extends TestCase
         $this->assertEquals($legend, $this->row->getLegend());
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->row = new Row();
     }

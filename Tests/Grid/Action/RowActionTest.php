@@ -329,7 +329,7 @@ class RowActionTest extends TestCase
         $this->assertTrue($this->rowAction->getEnabled());
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->rowAction = new RowAction(
             $this->title, $this->route, $this->confirm, $this->target, $this->attributes, $this->role

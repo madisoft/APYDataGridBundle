@@ -307,7 +307,7 @@ class NumberColumnTest extends TestCase
         $this->assertEquals(3, $column->getMaxFractionDigits());
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->column = new NumberColumn();
     }

@@ -162,7 +162,7 @@ class ActionsColumnTest extends TestCase
         ], $this->column->getRouteParameters($row, $rowAction));
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         $rowAction1 = $this->createMock(RowAction::class);
         $rowAction2 = $this->createMock(RowAction::class);
