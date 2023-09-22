@@ -14,19 +14,19 @@ namespace APY\DataGridBundle\Twig;
 
 use APY\DataGridBundle\Grid\Grid;
 use Symfony\Component\Routing\RouterInterface;
-use Twig\Environment;
+use Twig\TemplateWrapper;
 use Twig\Extension\AbstractExtension;
 use Twig\Extension\GlobalsInterface;
-use Twig\Template;
-use Twig\TwigFilter;
+use Twig\Environment;
 use Twig\TwigFunction;
+use Twig\TwigFilter;
 
 class DataGridExtension extends AbstractExtension implements GlobalsInterface
 {
     const DEFAULT_TEMPLATE = '@APYDataGrid/blocks.html.twig';
 
     /**
-     * @var Template[]
+     * @var TemplateWrapper[]
      */
     protected $templates = [];
 
@@ -271,9 +271,9 @@ class DataGridExtension extends AbstractExtension implements GlobalsInterface
     }
 
     /**
-     * @param string                                 $section
-     * @param \APY\DataGridBundle\Grid\Grid          $grid
-     * @param \APY\DataGridBundle\Grid\Column\Column $param
+     * @param string $section
+     * @param Grid   $grid
+     * @param Column $param
      *
      * @return string
      */
@@ -383,7 +383,6 @@ class DataGridExtension extends AbstractExtension implements GlobalsInterface
     protected function hasBlock(Environment $environment, $name)
     {
         foreach ($this->getTemplates($environment) as $template) {
-            /** @var Template $template */
             if ($template->hasBlock($name, [])) {
                 return true;
             }
@@ -399,14 +398,14 @@ class DataGridExtension extends AbstractExtension implements GlobalsInterface
      *
      * @throws \Exception
      *
-     * @return Template[]
+     * @return TemplateWrapper[]
      */
     protected function getTemplates(Environment $environment)
     {
         if (empty($this->templates)) {
-            if ($this->theme instanceof Template) {
+            if ($this->theme instanceof TemplateWrapper) {
                 $this->templates[] = $this->theme;
-                $this->templates[] = $environment->loadTemplate($this->defaultTemplate);
+                $this->templates[] = $environment->load($this->defaultTemplate);
             } elseif (is_string($this->theme)) {
                 $this->templates = $this->getTemplatesFromString($environment, $this->theme);
             } elseif (null === $this->theme) {
@@ -423,17 +422,14 @@ class DataGridExtension extends AbstractExtension implements GlobalsInterface
      * @param Environment $environment
      * @param mixed       $theme
      *
-     * @return Template[]
+     * @return array
      */
     protected function getTemplatesFromString(Environment $environment, $theme)
     {
         $this->templates = [];
 
-        $template = $environment->loadTemplate($theme);
-        while ($template instanceof Template) {
-            $this->templates[] = $template;
-            $template = $template->getParent([]);
-        }
+        $template = $environment->load($theme);
+        $this->templates[] = $template;
 
         return $this->templates;
     }
